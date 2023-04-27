@@ -14,10 +14,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
           card.classList.add("card");
 
+          let icon;
+          if (item.sex === "male") {
+            icon = "img/icons/mars.png";
+          } else {
+            icon = "img/icons/female.png";
+          }
+
           card.innerHTML = `<img src="${item.photo}" alt="photo">
             <div class="name">${item.name} ${item.surname}</div>
             <div class="sex">
-                <img src="img/icons/mars.png" alt="male">
+                <img src=${icon} alt="male">
             </div>
             <div class="age">${item.age}</div>`;
           document.querySelector(".app").appendChild(card);
@@ -26,7 +33,10 @@ window.addEventListener("DOMContentLoaded", () => {
         console.error("Что-то пошло не так!");
       }
     });
+    this.remove();
   }
 
-  req();
+  document
+    .querySelector("button")
+    .addEventListener("click", req, { once: true });
 });
