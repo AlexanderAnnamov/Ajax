@@ -1,18 +1,9 @@
 window.addEventListener("DOMContentLoaded", () => {
   function req() {
-    const request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:3000/people");
-    request.setRequestHeader("Content-type", "application/json; charset=utf-8");
-    request.send();
-    request.addEventListener("load", function () {
-      if (request.status == 200) {
-        let data = JSON.parse(request.response);
-        console.log(data);
-        createCards(data);
-      } else {
-        console.error("Что-то пошло не так!");
-      }
-    });
+    fetch("http://localhost:3000/people")
+      .then((data) => data.json())
+      .then((data) => createCards(data));
+
     this.remove();
   }
 
