@@ -1,7 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
+  const axios = require("axios/dist/browser/axios.cjs"); // browser
   function req() {
     getResource("http://localhost:3000/people")
-      .then((data) => createCards(data))
+      .then((data) => createCards(data.data))
       .catch((err) => console.error(err));
 
     this.remove();
@@ -12,13 +13,13 @@ window.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", req, { once: true });
 
   async function getResource(url) {
-    const res = await fetch(`${url}`);
+    const res = await axios(`${url}`);
 
-    if (!res.ok) {
+    if (res.status !== 200) {
       throw new Error(`Could not fetch ${url}, status: ${res.status}`);
     }
 
-    return await res.json();
+    return res;
   }
 
   function createCards(response) {
