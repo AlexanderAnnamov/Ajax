@@ -2,7 +2,8 @@ window.addEventListener("DOMContentLoaded", () => {
   function req() {
     fetch("http://localhost:3000/people")
       .then((data) => data.json())
-      .then((data) => createCards(data));
+      .then((data) => createCards(data))
+      .catch((err) => console.error(err));
 
     this.remove();
   }
